@@ -6,8 +6,9 @@ It currently works on Neovim version `Stable 0.9.1`, and would probably work on 
 Note: This config uses files that are present on my system. Those plugins, in their stable versions, are also available on my github
 
 ## Screenshots
-![image](https://github.com/Al0den/nvim-config/assets/111601320/d78724cd-8e48-4798-91b2-b4818b49f3c0)
-![image](https://github.com/Al0den/nvim-config/assets/111601320/b47763e0-49a3-48a3-9e7a-488d09fc7d56)
+![image](https://github.com/Al0den/nvim-config/assets/111601320/116aae04-758b-4e3a-83b3-9cf30d63bac4)
+![image](https://github.com/Al0den/nvim-config/assets/111601320/eab727f5-a588-4d59-a0dc-8473c8f8273c)
+
 
 ## Main config content
 
