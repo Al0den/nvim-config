@@ -70,6 +70,14 @@ end)
 vim.keymap.set("n", "<leader>b<Left>", function()
     vim.cmd("bprevious")
 end)
+--LSP
+vim.keymap.set("n", "<leader>h", function()
+    vim.lsp.buf.hover()
+end)
+
+vim.keymap.set("n", "<leader>d", function()
+    vim.lsp.buf.definition()
+end)
 
 --Others
 vim.keymap.set("n", "<leader>o", function()
