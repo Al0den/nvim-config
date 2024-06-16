@@ -3,6 +3,11 @@ return require("packer").startup(function(use)
     use 'lewis6991/impatient.nvim'
     use "folke/tokyonight.nvim"
 
+    use({
+	"L3MON4D3/LuaSnip",
+	tag = "v2.*",
+    })
+
     use {
         'nvim-tree/nvim-tree.lua',
         requires = { 'nvim-tree/nvim-web-devicons' },
@@ -10,6 +15,24 @@ return require("packer").startup(function(use)
             require"nvim-tree".setup()
         end
     }
+
+    use {
+        "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+        config = function()
+            require('toggle_lsp_diagnostics').init(vim.diagnostic.config())
+        end
+    }
+
+    use({
+        "kdheepak/lazygit.nvim",
+        requires = {
+            "nvim-telescope/telescope.nvim",
+            "nvim-lua/plenary.nvim",
+        },
+        config = function()
+            require("telescope").load_extension("lazygit")
+        end,
+    })
 
     use "cohama/lexima.vim"
 
@@ -90,13 +113,7 @@ return require("packer").startup(function(use)
     }
     use { "~/Desktop/projects/notion",
         config = function()
-            require "notion".setup({
-                viewOnEdit = {
-                    enabled = false,
-                    replace = false,
-                },
-                noEvent = "Pas d'evenements"
-            })
+            require "notion".setup({})
         end,
         require = { "nvim-lua/plenary.nvim" }
     }
@@ -104,12 +121,12 @@ return require("packer").startup(function(use)
     --Others
     use "kyazdani42/nvim-web-devicons"
     use "nvim-lualine/lualine.nvim"
-    use {
-        "akinsho/bufferline.nvim",
-        config = function()
-            require"bufferline".setup()
-        end
-    }
+    --use {
+    --    "akinsho/bufferline.nvim",
+    --    config = function()
+    --        require"bufferline".setup()
+    --    end
+    --}
     use "vzytoi/runcode.nvim"
     use { "petertriho/nvim-scrollbar",
         config = function()
@@ -119,7 +136,7 @@ return require("packer").startup(function(use)
     use {
         "akinsho/toggleterm.nvim",
         config = function()
-            require"toggleterm".setup()
+            require"toggleterm".setup({autochdir = true})
         end
     }
 end)

@@ -1,34 +1,45 @@
-local builtin = require"telescope.builtin"
+local builtin = require "telescope.builtin"
 
 vim.keymap.set("n", "<leader>e", function()
     vim.cmd("NvimTreeToggle")
 end)
 
+vim.keymap.set("n", "<leader>g", function()
+    require("telescope").extensions.lazygit.lazygit()
+end)
+
 --Window navigation
 vim.keymap.set("n", "<leader><Left>", function()
     vim.api.nvim_command("wincmd h")
-end, {}
-)
+end)
+
+vim.keymap.set("t", "<leader><Left>", function()
+    vim.api.nvim_command("wincmd h")
+end)
 
 vim.keymap.set("n", "<leader><Right>", function()
     vim.api.nvim_command("wincmd l")
-end, {}
-)
+end)
 
 vim.keymap.set("n", "<leader><Up>", function()
     vim.api.nvim_command("wincmd k")
-end, {}
-)
+end)
 
 vim.keymap.set("n", "<leader><Down>", function()
     vim.api.nvim_command("wincmd j")
-end, {}
-)
+end)
 
-vim.keymap.set("n" ,"<leader>t", function()
-    local terminal = require"toggleterm.terminal".Terminal:new({hidden = true})
-    terminal:toggle()
-end, {})
+vim.keymap.set("n", "<leader>t", function()
+    vim.cmd("ToggleTerm size=60 direction=vertical")
+end)
+
+vim.keymap.set("t", "<leader>t", function()
+    vim.cmd("ToggleTerm")
+end)
+
+vim.keymap.set("t", "<leader>q", function()
+    require'toggleterm'.exec("exit")
+end)
 
 --Window actions
 vim.keymap.set("n", "<leader>w", function()
@@ -44,14 +55,16 @@ vim.keymap.set("n", "<leader>fp", function()
     vim.cmd("Telescope project")
 end)
 
+vim.keymap.set("n", "<leader>fh", function()
+    builtin.help_tags()
+end)
+
 vim.keymap.set("n", "<leader>fg", function()
     builtin.live_grep()
 end)
 
 vim.keymap.set("n", "<leader>n", function()
-    local curr = vim.fn.win_getid()
     vim.api.nvim_command("vnew")
-    vim.fn.win_gotoid(curr)
 end)
 
 --Buffers
@@ -70,8 +83,9 @@ end)
 vim.keymap.set("n", "<leader>b<Left>", function()
     vim.cmd("bprevious")
 end)
+
 --LSP
-vim.keymap.set("n", "<leader>h", function()
+vim.keymap.set("n", "<leader>q", function()
     vim.lsp.buf.hover()
 end)
 
@@ -83,4 +97,3 @@ end)
 vim.keymap.set("n", "<leader>o", function()
     vim.lsp.buf.format()
 end)
-

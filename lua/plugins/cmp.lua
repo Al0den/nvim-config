@@ -1,5 +1,5 @@
 local cmp = require 'cmp'
-local lspkind = require"lspkind"
+local lspkind = require "lspkind"
 
 local has_words_before = function()
     if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
@@ -9,16 +9,12 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
--- The following example advertise capabilities to `clangd`.
-require 'lspconfig'.clangd.setup {
-    capabilities = capabilities,
-}
-
-require"lspconfig".tsserver.setup {
-    capabilities = capabilities,
-}
-
 cmp.setup {
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        end,
+    },
     mapping = cmp.mapping.preset.insert {
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),

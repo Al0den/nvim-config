@@ -1,7 +1,7 @@
 local masonlsp = require("mason-lspconfig")
 local servers = masonlsp.get_installed_servers()
 
-local status, lsp = pcall(require, "lspconfig")
+local status, _ = pcall(require, "lspconfig")
 if (not status) then return end
 
 local capabilities = require "cmp_nvim_lsp".default_capabilities()
@@ -16,6 +16,7 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 )
 
 local on_attach = function(client, bufnr)
+    client.offsetEncoding = "utf-16"
     require "core.autocmds".lsp()
     local codelens = vim.api.nvim_create_augroup(
         'LSPCodeLens',
@@ -24,7 +25,7 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'CursorHold' }, {
         group = codelens,
         callback = function()
-            local _, err = pcall(vim.lsp.codelens.refresh)
+            local _, _ = pcall(vim.lsp.codelens.refresh)
         end,
         buffer = bufnr,
     })
@@ -58,6 +59,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
 )
 
+-- Autocommand to update diagnostics on cursor movement
 vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "DiagnosticError" })
 vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn", linehl = "", numhl = "DiagnosticWarn" })
 vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "DiagnosticInfo" })
